@@ -1,0 +1,65 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- The f:view element is required to get certain components to work with webkit based browsers
+	(Google Chrome and Safari) -->
+<f:view contentType="text/html">
+
+	<ui:composition template="/WEB-INF/templates/lab1Template.xhtml">
+
+		<ui:define name="content">
+     
+	<h:head>
+				<!-- Add support for <meta>, <link>, and <scripts> here -->
+				<meta http-equiv="Content-Type"
+					content="text/html; charset=ISO-8859-1" />
+				<!-- Change the title of this document!!! -->
+				<title>[BMI Calculator]</title>
+
+			</h:head>
+
+			<h:body>
+				<!-- Add your content here -->
+				<h2>BMI Calculator</h2>
+				
+				This application is used to calculate the body mass index(BMI)for a person
+				
+				<div class="ui-layout-unit-header ui-widget-header ui-corner-all"><span class="ui-layout-unit-header-title">Enter your weight in pounds and your height in feet and inches</span><a href="javascript:void(0)" class="ui-layout-unit-header-icon ui-state-default ui-corner-all" title="Close"><span class="ui-icon ui-icon-close"></span></a><a href="javascript:void(0)" class="ui-layout-unit-header-icon ui-state-default ui-corner-all" title="Collapse"><span class="ui-icon ui-icon-triangle-1-e"></span></a></div>
+				
+				<h:form id="BMIcalculator">
+					<p:messages id="messages" />
+					<h:panelGrid columns="2">
+						<h:outputLabel for="weight" value="Weight:">
+						<p:inputText id="name" value="#{bmiController.weight}" required="true">
+						</p:inputText>lbs
+						</h:outputLabel>
+						<br/>
+						
+						<h:outputLabel for="height" value="Height:">
+						<p:inputText id="heightFeet" value="#{bmiController.heightFeet}" required="true" size="2"/>feet
+						<p:inputText id="heightInches" value="#{bmiController.heightInches}" required="true" size="2"/>inches
+						</h:outputLabel>
+						<br/>
+						<p:commandButton value="Calculate" ajax="false"
+							actionListener="#{bmiController.calculateBMI}"/>
+						<p:commandButton value="Clear" ajax="false"/>
+
+
+						<!-- End of content area -->
+					</h:panelGrid>
+				</h:form>
+			</h:body>
+
+		</ui:define>
+
+	</ui:composition>
+
+</f:view>
+
+
+</html>
+      

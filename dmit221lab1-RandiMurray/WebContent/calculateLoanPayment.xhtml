@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- The f:view element is required to get certain components to work with webkit based browsers
+	(Google Chrome and Safari) -->
+<f:view contentType="text/html">
+
+	<ui:composition template="/WEB-INF/templates/lab1Template.xhtml">
+
+		<ui:define name="content">
+			<h:head>
+				<!-- Add support for <meta>, <link>, and <scripts> here -->
+				<meta http-equiv="Content-Type"
+					content="text/html; charset=ISO-8859-1" />
+				<!-- Change the title of this document!!! -->
+				<title>Loan Calculator</title>
+
+			</h:head>
+
+			<h:body>
+				<!-- Add your content here -->
+
+				<h:form id="CalculateLoanPayment">
+					<p:messages id="messages" />
+					<h:panelGrid columns="2">
+						<h:outputLabel for="mortgageAmount" value="Mortgage Amount: ">
+							<p:inputText id="mortgageAmount"
+								value="#{loanBean.currentLoan.mortgageAmount}" required="true" />
+						</h:outputLabel>
+						<br />
+
+						<h:outputLabel for="annualInterestRate" value="Interest Rate:">
+							<p:spacer width="45" height="10" />
+							<p:inputText id="annualInterestRate"
+								value="#{loanBean.currentLoan.annualInterestRate}"
+								required="true" />%
+						</h:outputLabel>
+						<br />
+
+						<h:outputLabel for="amortizationPeriod" value="Amortization:">
+							<p:spacer width="47" height="10" />
+							<p:inputText id="amortizationPeriod"
+								value="#{loanBean.currentLoan.amortizationPeriod}"
+								required="true" />yrs
+						</h:outputLabel>
+						<br />
+
+
+						<p:commandButton value="Calculate" ajax="false"
+							actionListener="#{loanBean.calculatePayment}" />
+						<p:commandButton value="Clear" ajax="false" />
+						
+
+						<p:barChart id="basic" value="#{loanBean.loanModel}"
+							legendPosition="ne" yaxisLabel="Mortgage Amount" xaxisLabel="Year"
+							title="Mortgage Amortization " min="0.0" max="#{loanBean.currentLoan.mortgageAmount}" 
+							style="height:300px" />
+						<!-- End of content area -->
+					</h:panelGrid>
+				</h:form>
+
+
+				<!-- End of content area -->
+			</h:body>
+
+		</ui:define>
+	</ui:composition>
+
+</f:view>
+</html>
